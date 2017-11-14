@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="mozdevz.org.devfestmaputo.Activities.TeamActivity"
+    tools:showIn="@layout/activity_team">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/album_title"
+            android:text="Organização"
+            android:textSize="@dimen/activity_vertical_margin" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_organizacao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/album_title"
+            android:text="Suporte"
+            android:textSize="@dimen/activity_vertical_margin" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_suporte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

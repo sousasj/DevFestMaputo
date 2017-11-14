@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">DevFest Maputo</string>
+    <string name="title_activity_team">TeamActivity</string>
+    <string-array name="tabs">
+        <item> HOME </item>
+        <item> SCHEDULE </item>
+        <item> SPEAKERS </item>
+        <item> SPONSORS </item>
+    </string-array>
+    <string name="title_activity_session">SessionActivity</string>
+    <string name="title_activity_speaker">SpeakerActivity</string>
+    <string name="about_application">Sobre a App</string>
+    <string name="share_application">Partilhar</string>
+    <string name="team_application">Team</string>
+    <string name="share_app">Faça download do aplicativo e fique a partilhe a experienx«cia do DevFest: \\ n\\n https://play.google.com/Store/apps/Details?ID=mozdevz.org.devfestmaputo</string>
+    <string name="buy_ticket">\\ n Compre já os seus bilhetes!</string>
+</resources>

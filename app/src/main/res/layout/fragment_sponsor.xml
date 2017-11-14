@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/album_title"
+            android:text="Apoio"
+            android:textSize="@dimen/activity_vertical_margin" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_apoio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/album_title"
+            android:text="Organização"
+            android:textSize="@dimen/activity_vertical_margin" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_organizacao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
