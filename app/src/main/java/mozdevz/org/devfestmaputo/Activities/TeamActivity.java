@@ -1,17 +1,13 @@
 package mozdevz.org.devfestmaputo.Activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.generic.RoundingParams;
@@ -21,55 +17,54 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import mozdevz.org.devfestmaputo.Adapters.AdapterSocial;
-import mozdevz.org.devfestmaputo.Adapters.AdapterSpeaker;
-import mozdevz.org.devfestmaputo.Adapters.AdapterSponsor;
 import mozdevz.org.devfestmaputo.Adapters.AdapterTeam;
 import mozdevz.org.devfestmaputo.Config.Config;
 import mozdevz.org.devfestmaputo.Config.Constantes;
-import mozdevz.org.devfestmaputo.Model.Parceiros;
 import mozdevz.org.devfestmaputo.Model.Socials;
-import mozdevz.org.devfestmaputo.Model.Speaker;
 import mozdevz.org.devfestmaputo.Model.Team;
 import mozdevz.org.gdgmaputo.R;
 
 
 public class TeamActivity extends Config {
-    private RecyclerView mRecyclerView, mRecyclerView2;
-    private DatabaseReference mRootRef;
-    private FirebaseRecyclerAdapter<Team, AdapterTeam> mFirebaseAdapter, mFirebaseAdapter2;
-    private LinearLayoutManager mLinearLayoutManager, mLinearLayoutManager2;
 
-
-    private float scale;
-    private int width, height, roundPixels;
-    Context c;
+    private int roundPixels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.team_application);
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        scale = getResources().getDisplayMetrics().density;
-        width = getResources().getDisplayMetrics().widthPixels - (int) (14 * scale + 0.5f);
-        height = (width / 16) * 9;
+        float scale = getResources().getDisplayMetrics().density;
+        int width = getResources().getDisplayMetrics().widthPixels - (int) (14 * scale + 0.5f);
 
         roundPixels = (int) (2 * scale + 0.5f);
 
-        mRecyclerView2 = (RecyclerView) findViewById(R.id.rv_suporte);
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_organizacao);
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.rv_organizacao);
+        RecyclerView mRecyclerView2 = (RecyclerView) findViewById(R.id.rv_suporte);
 
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        mLinearLayoutManager2 = new LinearLayoutManager(this);
+        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        LinearLayoutManager mLinearLayoutManager2 = new LinearLayoutManager(this){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
 
-        mRootRef = FirebaseDatabase.getInstance().getReference().child(Constantes.FIREBASE_TEAM);
+        final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference().child(Constantes.FIREBASE_TEAM);
 
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<Team, AdapterTeam>(
+        FirebaseRecyclerAdapter<Team, AdapterTeam> mFirebaseAdapter = new FirebaseRecyclerAdapter<Team, AdapterTeam>(
                 Team.class,
                 R.layout.item_team,
                 AdapterTeam.class,
@@ -104,18 +99,26 @@ public class TeamActivity extends Config {
                 DatabaseReference mRootRefSocials = FirebaseDatabase.getInstance().getReference().child(Constantes.FIREBASE_TEAM)
                         .child("0").child(Constantes.FIREBASE_MEMBERS).child(postKey);
 
-                GridLayoutManager mGridLayoutManager =  new GridLayoutManager(getApplicationContext(), 5);
+                GridLayoutManager mGridLayoutManager =  new GridLayoutManager(getApplicationContext(), 5){
+                    @Override
+                    public boolean canScrollHorizontally() {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+                };
                 FirebaseRecyclerAdapter<Socials, AdapterSocial> mFirebaseAdapterSocial = new FirebaseRecyclerAdapter<Socials, AdapterSocial>(
                         Socials.class,
                         R.layout.item_social,
                         AdapterSocial.class,
                         mRootRefSocials.child(Constantes.FIREBASE_SOCIALS)) {
+
                     @Override
                     protected void populateViewHolder(AdapterSocial holder, Socials model, int position) {
                         final DatabaseReference postRef = getRef(position);
-                        final String postKey = postRef.getKey();
-
-                        final String url = model.getLink();
                         final String name = model.getName();
                         if(name.equalsIgnoreCase("Facebook")){
                             holder.imageButton.setImageResource(R.drawable.facebook);
@@ -148,7 +151,7 @@ public class TeamActivity extends Config {
         mRecyclerView.setAdapter(mFirebaseAdapter);
 
 
-        mFirebaseAdapter2 = new FirebaseRecyclerAdapter<Team, AdapterTeam>(
+        FirebaseRecyclerAdapter<Team, AdapterTeam> mFirebaseAdapter2 = new FirebaseRecyclerAdapter<Team, AdapterTeam>(
                 Team.class,
                 R.layout.item_team,
                 AdapterTeam.class,
@@ -181,7 +184,17 @@ public class TeamActivity extends Config {
                 DatabaseReference mRootRefSocials = FirebaseDatabase.getInstance().getReference().child(Constantes.FIREBASE_TEAM)
                         .child("1").child(Constantes.FIREBASE_MEMBERS).child(postKey);
 
-                GridLayoutManager mGridLayoutManager =  new GridLayoutManager(getApplicationContext(), 5);
+                GridLayoutManager mGridLayoutManager =  new GridLayoutManager(getApplicationContext(), 5){
+                    @Override
+                    public boolean canScrollHorizontally() {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+                };
                 FirebaseRecyclerAdapter<Socials, AdapterSocial> mFirebaseAdapterSocial = new FirebaseRecyclerAdapter<Socials, AdapterSocial>(
                         Socials.class,
                         R.layout.item_social,
@@ -190,11 +203,9 @@ public class TeamActivity extends Config {
                     @Override
                     protected void populateViewHolder(AdapterSocial holder, Socials model, int position) {
                         final DatabaseReference postRef = getRef(position);
-                        final String postKey = postRef.getKey();
 
                         final String url = model.getLink();
                         final String name = model.getName();
-                        Toast.makeText(TeamActivity.this, name, Toast.LENGTH_SHORT).show();
                         if(name.equalsIgnoreCase("Facebook")){
                             holder.imageButton.setImageResource(R.drawable.facebook);
                         } else if(name.equalsIgnoreCase("Twitter")){
