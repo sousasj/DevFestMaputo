@@ -23,7 +23,7 @@ public final class Constantes {
 
     public static final String FIREBASE_TAGS= "tags";
 
-    public static final String BUNDLE_DATE= "26 de Novembro";
+    public static final String BUNDLE_DATE= "25 de Novembro";
     public static final String BUNDLE_LOCAL= "Standard Bank Incubator";
 
     public static final String BUNDLE_DEV_FEST_MAPUTO_QUOTE= "O maior festival sobre tecnologias Google para developers organizado pela comunidade GDG de Maputo! Tudo sobre Android, Web, Cloud, IoT, e mais.";

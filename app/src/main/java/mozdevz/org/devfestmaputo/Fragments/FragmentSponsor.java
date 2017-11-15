@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.generic.RoundingParams;
@@ -78,8 +77,19 @@ public class FragmentSponsor extends Fragment {
         mRecyclerView2 = (RecyclerView) rootView.findViewById(R.id.rv_organizacao);
 
 
-        mLinearLayoutManager = new LinearLayoutManager(getActivity());
-        gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        mLinearLayoutManager = new LinearLayoutManager(getActivity()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        gridLayoutManager = new GridLayoutManager(getActivity(), 2)
+        {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
 
         mRootRef = FirebaseDatabase.getInstance().getReference().child(Constantes.FIREBASE_SPONSORS);
 
@@ -111,6 +121,12 @@ public class FragmentSponsor extends Fragment {
                 String auxImage="";
                 if (name.equals("Google")) {
                     auxImage = i.replaceAll(i,"https://cdn.vox-cdn.com/uploads/chorus_asset/file/6466217/fixed-google-logo-font.png");
+
+                } else if (name.equals("Muthiana Code")) {
+                    auxImage = i.replaceAll(i,"https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAwXAAAAJDY0NmJjYjlmLWNkYzktNGE4YS1iYjhkLTBjNTU0NmVjY2IzYg.png");
+
+                } else if (name.equals("Mozdevz")) {
+                    auxImage = i.replaceAll(i,"http://idear.io/wp-content/uploads/2017/07/MozDevz_muvaTech.png");
 
                 }
 
@@ -162,12 +178,6 @@ public class FragmentSponsor extends Fragment {
 
                 } else if (name.equals("CENFOSS")) {
                     auxImage = i.replaceAll(i,"http://www.cenfoss.co.mz/wp-content/uploads/2017/01/logo-cenfoss.png");
-
-                } else if (name.equals("Muthiana Code")) {
-                    auxImage = i.replaceAll(i,"https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAwXAAAAJDY0NmJjYjlmLWNkYzktNGE4YS1iYjhkLTBjNTU0NmVjY2IzYg.png");
-
-                } else if (name.equals("Mozdevz")) {
-                    auxImage = i.replaceAll(i,"http://idear.io/wp-content/uploads/2017/07/MozDevz_muvaTech.png");
 
                 }
 
