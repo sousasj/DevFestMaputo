@@ -14,6 +14,6 @@
     <item
         android:id="@+id/aboutApp"
         android:title="@string/about_application"
-        android:orderInCategory="101"
+        android:orderInCategory="102"
         />
 </menu>
